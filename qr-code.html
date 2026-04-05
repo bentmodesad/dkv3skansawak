@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Dinamis | 10 DKV 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; }
+
+        .navbar {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.3rem; font-weight: bold; color: #4f46e5; }
+        .logo span { color: #333; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { text-decoration: none; color: #333; font-weight: 500; }
+        .nav-links a:hover { color: #4f46e5; }
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+
+        .page-header {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            padding: 100px 0 40px;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+        .page-header h1 { font-size: 2rem; margin-bottom: 10px; }
+
+        .qr-container { max-width: 800px; margin: 40px auto; }
+        .qr-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .qr-code { display: flex; justify-content: center; margin: 20px 0; }
+        .qr-code canvas, .qr-code img { max-width: 250px; height: auto; }
+
+        .qr-type-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .qr-type-btn {
+            padding: 10px 20px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .qr-type-btn.active {
+            background: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+        }
+
+        .member-select { margin: 20px 0; }
+        .member-select select {
+            width: 100%;
+            max-width: 300px;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .download-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+        .info-text { color: #64748b; font-size: 0.85rem; margin-top: 15px; }
+
+        .footer {
+            background: #0f172a;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: block; }
+            .qr-type-btn { padding: 6px 12px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">🎨 10 <span>DKV 3</span></div>
+            <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="anggota.html">Anggota</a></li>
+                <li><a href="album.html">Album</a></li>
+                <li><a href="jadwal.html">Jadwal</a></li>
+                <li><a href="chat.html">Chat</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="qr-code.html">QR Code</a></li>
+                <li><a href="login.html">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-qrcode"></i> QR Code Dinamis</h1>
+            <p>Scan QR untuk akses cepat ke website & info anggota</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="qr-container">
+            <div class="qr-card">
+                <div class="qr-type-selector">
+                    <button class="qr-type-btn active" onclick="changeQRType('website')">🌐 Website Kelas</button>
+                    <button class="qr-type-btn" onclick="changeQRType('album')">📸 Album Foto</button>
+                    <button class="qr-type-btn" onclick="changeQRType('jadwal')">📅 Jadwal</button>
+                    <button class="qr-type-btn" onclick="changeQRType('anggota')">👥 Anggota</button>
+                    <button class="qr-type-btn" onclick="changeQRType('member')">👤 Anggota Tertentu</button>
+                </div>
+                
+                <div id="memberSelectContainer" class="member-select" style="display: none;">
+                    <label>Pilih Anggota:</label>
+                    <select id="memberSelect" onchange="generateMemberQR()"></select>
+                </div>
+                
+                <div class="qr-code" id="qrcode"></div>
+                
+                <button class="download-btn" onclick="downloadQR()">
+                    <i class="fas fa-download"></i> Download QR Code
+                </button>
+                <div class="info-text">
+                    <i class="fas fa-info-circle"></i> Scan QR code dengan kamera HP untuk akses langsung
+                </div>
+            </div>
+            
+            <div class="qr-card">
+                <h3><i class="fas fa-mobile-alt"></i> Cara Menggunakan</h3>
+                <ol style="text-align: left; margin-top: 15px; padding-left: 20px; line-height: 1.8;">
+                    <li>Pilih jenis QR code yang diinginkan</li>
+                    <li>Untuk QR anggota, pilih nama anggota dari daftar</li>
+                    <li>Scan QR code menggunakan kamera HP atau aplikasi QR scanner</li>
+                    <li>Atau download QR code untuk dicetak/disebar</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Kelas 10 DKV 3 - SMK Negeri 1 Cluwak</p>
+        </div>
+    </footer>
+
+    <script src="js/storage.js"></script>
+    <script>
+        let currentQRType = 'website';
+        let currentQR = null;
+        let membersList = [];
+
+        const BASE_URL = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '/');
+
+        function loadMembers() {
+            if (typeof storage === 'undefined') {
+                console.error('Storage not loaded');
+                return;
+            }
+            membersList = storage.getMembers();
+            const select = document.getElementById('memberSelect');
+            if (select) {
+                select.innerHTML = '<option value="">-- Pilih Anggota --</option>' + 
+                    membersList.map(m => `<option value="${m.id}">${m.noAbsen} - ${m.name}</option>`).join('');
+            }
+        }
+
+        function changeQRType(type) {
+            currentQRType = type;
+            
+            document.querySelectorAll('.qr-type-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(getButtonText(type))) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            const memberSelectContainer = document.getElementById('memberSelectContainer');
+            if (type === 'member') {
+                memberSelectContainer.style.display = 'block';
+                loadMembers();
+                generateMemberQR();
+            } else {
+                memberSelectContainer.style.display = 'none';
+                generateQR(getURLForType(type));
+            }
+        }
+
+        function getButtonText(type) {
+            const texts = {
+                'website': 'Website',
+                'album': 'Album',
+                'jadwal': 'Jadwal',
+                'anggota': 'Anggota',
+                'member': 'Anggota Tertentu'
+            };
+            return texts[type] || 'Website';
+        }
+
+        function getURLForType(type) {
+            const urls = {
+                'website': BASE_URL + 'index.html',
+                'album': BASE_URL + 'album.html',
+                'jadwal': BASE_URL + 'jadwal.html',
+                'anggota': BASE_URL + 'anggota.html'
+            };
+            return urls[type] || BASE_URL;
+        }
+
+        function generateMemberQR() {
+            const select = document.getElementById('memberSelect');
+            const memberId = select.value;
+            
+            if (!memberId) {
+                generateQR(BASE_URL + 'anggota.html');
+                return;
+            }
+            
+            const member = membersList.find(m => m.id == memberId);
+            if (member) {
+                const memberURL = `${BASE_URL}anggota.html?absen=${member.noAbsen}`;
+                generateQR(memberURL);
+            }
+        }
+
+        function generateQR(text) {
+            const qrContainer = document.getElementById('qrcode');
+            qrContainer.innerHTML = '';
+            
+            currentQR = new QRCode(qrContainer, {
+                text: text,
+                width: 250,
+                height: 250,
+                colorDark: "#4f46e5",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+
+        function downloadQR() {
+            const qrCanvas = document.querySelector('#qrcode canvas');
+            if (!qrCanvas) {
+                alert('QR Code belum siap!');
+                return;
+            }
+            
+            const link = document.createElement('a');
+            let filename = 'qr_';
+            
+            switch(currentQRType) {
+                case 'website': filename += 'website_dkv3'; break;
+                case 'album': filename += 'album_dkv3'; break;
+                case 'jadwal': filename += 'jadwal_dkv3'; break;
+                case 'anggota': filename += 'anggota_dkv3'; break;
+                case 'member': 
+                    const select = document.getElementById('memberSelect');
+                    const member = membersList.find(m => m.id == select.value);
+                    filename += member ? member.noAbsen + '_' + member.name : 'member';
+                    break;
+                default: filename += 'dkv3';
+            }
+            
+            link.download = filename + '.png';
+            link.href = qrCanvas.toDataURL();
+            link.click();
+        }
+
+        // Mobile menu
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                if (navLinks.classList.contains('active')) {
+                    navLinks.style.display = 'flex';
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '70px';
+                    navLinks.style.left = '0';
+                    navLinks.style.width = '100%';
+                    navLinks.style.backgroundColor = 'white';
+                    navLinks.style.padding = '20px';
+                    navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                } else {
+                    navLinks.style.display = '';
+                }
+            });
+        }
+
+        // Inisialisasi
+        setTimeout(() => {
+            generateQR(getURLForType('website'));
+        }, 100);
+    </script>
+</body>
+</html>

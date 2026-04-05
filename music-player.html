@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player | 10 DKV 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #1e1b4b, #312e81); min-height: 100vh; }
+        
+        .navbar { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 1000; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.3rem; font-weight: bold; color: white; }
+        .logo span { color: #fbbf24; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { text-decoration: none; color: white; font-weight: 500; opacity: 0.8; }
+        .nav-links a:hover { opacity: 1; }
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: white; }
+        
+        .page-header { padding: 100px 0 40px; text-align: center; color: white; }
+        .page-header h1 { font-size: 2rem; margin-bottom: 10px; }
+        
+        .music-container { max-width: 500px; margin: 40px auto; background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border-radius: 30px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .album-art { width: 200px; height: 200px; margin: 0 auto 30px; background: linear-gradient(135deg, #4f46e5, #ec489a); border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white; box-shadow: 0 20px 30px rgba(0,0,0,0.3); }
+        .song-info { text-align: center; margin-bottom: 30px; color: white; }
+        .song-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; }
+        .song-artist { opacity: 0.7; }
+        .progress-container { background: rgba(255,255,255,0.2); border-radius: 10px; height: 5px; margin: 20px 0; cursor: pointer; }
+        .progress-bar { background: #fbbf24; border-radius: 10px; height: 100%; width: 0%; transition: width 0.1s linear; }
+        .time-info { display: flex; justify-content: space-between; color: white; font-size: 0.8rem; margin-top: -15px; margin-bottom: 20px; }
+        .controls { display: flex; justify-content: center; gap: 30px; margin: 30px 0; }
+        .control-btn { background: white; border: none; width: 55px; height: 55px; border-radius: 50%; cursor: pointer; font-size: 1.3rem; transition: all 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .control-btn:hover { transform: scale(1.05); }
+        .play-btn { background: #fbbf24; color: #1e1b4b; width: 65px; height: 65px; font-size: 1.5rem; }
+        .playlist { margin-top: 30px; }
+        .playlist-title { color: white; margin-bottom: 15px; font-size: 1.1rem; }
+        .playlist-item { background: rgba(255,255,255,0.1); border-radius: 15px; padding: 12px 20px; margin-bottom: 10px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 15px; }
+        .playlist-item:hover { background: rgba(255,255,255,0.2); transform: translateX(5px); }
+        .playlist-item.active { background: #fbbf24; color: #1e1b4b; }
+        .playlist-number { width: 30px; font-weight: bold; }
+        .playlist-title-song { flex: 1; }
+        .playlist-duration { opacity: 0.7; font-size: 0.8rem; }
+        .volume-container { display: flex; align-items: center; gap: 10px; margin-top: 20px; color: white; }
+        .volume-slider { flex: 1; height: 4px; -webkit-appearance: none; background: rgba(255,255,255,0.2); border-radius: 5px; }
+        .volume-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; background: #fbbf24; border-radius: 50%; cursor: pointer; }
+        
+        .footer { background: #0f172a; color: white; padding: 40px 0; text-align: center; margin-top: 50px; }
+        @media (max-width: 768px) { .nav-links { display: none; } .menu-toggle { display: block; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">🎨 10 <span>DKV 3</span></div>
+            <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="anggota.html">Anggota</a></li>
+                <li><a href="album.html">Album</a></li>
+                <li><a href="jadwal.html">Jadwal</a></li>
+                <li><a href="chat.html">Chat</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="chatbot.html">AI Bot</a></li>
+                <li><a href="saran-box.html">Saran Box</a></li>
+                <li><a href="music-player.html">Music</a></li>
+                <li><a href="login.html">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-music"></i> Music Player DKV 3</h1>
+            <p>Dengarkan lagu-lagu keren kelas kita!</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="music-container">
+            <div class="album-art" id="albumArt">
+                <i class="fas fa-headphones"></i>
+            </div>
+            <div class="song-info">
+                <div class="song-title" id="songTitle">Jakarta Hari Ini</div>
+                <div class="song-artist" id="songArtist">10 DKV 3</div>
+            </div>
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="time-info">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+            <div class="controls">
+                <button class="control-btn" id="prevBtn"><i class="fas fa-backward"></i></button>
+                <button class="control-btn play-btn" id="playPauseBtn"><i class="fas fa-play"></i></button>
+                <button class="control-btn" id="nextBtn"><i class="fas fa-forward"></i></button>
+            </div>
+            <div class="volume-container">
+                <i class="fas fa-volume-down"></i>
+                <input type="range" id="volumeSlider" min="0" max="100" value="70" class="volume-slider">
+                <i class="fas fa-volume-up"></i>
+            </div>
+            <div class="playlist">
+                <div class="playlist-title"><i class="fas fa-list"></i> Playlist Kelas</div>
+                <div id="playlist"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Kelas 10 DKV 3 - SMK Negeri 1 Jakarta</p>
+        </div>
+    </footer>
+
+    <script src="js/music-player.js"></script>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+        }
+    </script>
+</body>
+</html>

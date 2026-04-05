@@ -1,0 +1,24 @@
+{
+  "name": "10 DKV 3 - Website Kelas",
+  "short_name": "DKV 3",
+  "description": "Website resmi kelas 10 DKV 3 - Desain Komunikasi Visual",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "theme_color": "#4f46e5",
+  "background_color": "#ffffff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://placehold.co/192x192/4f46e5/white?text=DKV",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://placehold.co/512x512/4f46e5/white?text=DKV",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

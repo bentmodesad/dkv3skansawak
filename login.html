@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin | 10 DKV 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .login-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .login-card h1 {
+            font-size: 1.8rem;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .login-card p {
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #1e293b;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .checkbox-group input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            background: #4338ca;
+            transform: translateY(-2px);
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 0.85rem;
+        }
+
+        .alert.error {
+            background: #fee2e2;
+            color: #dc2626;
+            display: block;
+        }
+
+        .alert.success {
+            background: #d1fae5;
+            color: #059669;
+            display: block;
+        }
+
+        .back-link {
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 30px 20px;
+            }
+            .login-card h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div class="login-icon">🎨</div>
+        <h1>Admin Panel</h1>
+        <p>10 DKV 3 - SMK Negeri 1 Cluwak</p>
+
+        <div id="alertMessage" class="alert"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="admin" required autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="••••••" required>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="rememberMe">
+                <label>Ingat saya</label>
+            </div>
+
+            <button type="submit" class="btn-login">
+                <i class="fas fa-sign-in-alt"></i> Masuk
+            </button>
+        </form>
+
+        <div class="back-link">
+            <a href="index.html">← Kembali ke Beranda</a>
+        </div>
+    </div>
+
+    <script>
+        // Handle Login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('rememberMe').checked;
+            const alertDiv = document.getElementById('alertMessage');
+
+            if (username === 'admin' && password === 'admin123') {
+                // Simpan session
+                if (remember) {
+                    localStorage.setItem('rememberMe', 'true');
+                }
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', username);
+                localStorage.setItem('loginTime', new Date().toISOString());
+                
+                alertDiv.className = 'alert success';
+                alertDiv.innerHTML = '<i class="fas fa-check-circle"></i> Login berhasil! Mengarahkan...';
+                
+                setTimeout(() => {
+                    window.location.href = 'admin.html';
+                }, 1000);
+            } else {
+                alertDiv.className = 'alert error';
+                alertDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Username atau password salah!';
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            }
+        });
+
+        // Cek remember me
+        if (localStorage.getItem('rememberMe') === 'true' && localStorage.getItem('isLoggedIn') === 'true') {
+            const loginTime = localStorage.getItem('loginTime');
+            if (loginTime) {
+                const elapsed = (new Date() - new Date(loginTime)) / (1000 * 60 * 60);
+                if (elapsed < 8) {
+                    window.location.href = 'admin.html';
+                }
+            }
+        }
+
+        document.getElementById('username').focus();
+    </script>
+</body>
+</html>

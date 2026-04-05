@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamus DKV | 10 DKV 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        .logo span {
+            color: #333;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #4f46e5;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            padding: 100px 0 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Dictionary */
+        .dictionary-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .dictionary-search {
+            margin-bottom: 30px;
+        }
+
+        .dictionary-search input {
+            width: 100%;
+            padding: 14px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .dictionary-search input:focus {
+            border-color: #4f46e5;
+        }
+
+        .dictionary-letter-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .letter-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #e2e8f0;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .letter-btn:hover,
+        .letter-btn.active {
+            background: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+        }
+
+        .dictionary-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .dictionary-item {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #4f46e5;
+        }
+
+        .dictionary-term {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .dictionary-definition {
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .dictionary-category {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #4f46e5;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #94a3b8;
+        }
+
+        .footer {
+            background: #0f172a;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">🎨 10 <span>DKV 3</span></div>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="anggota.html">Anggota</a></li>
+                <li><a href="album.html">Album</a></li>
+                <li><a href="jadwal.html">Jadwal</a></li>
+                <li><a href="chat.html">Chat</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="chatbot.html">AI Bot</a></li>
+                <li><a href="saran-box.html">Saran Box</a></li>
+                <li><a href="music-player.html">Music</a></li>
+                <li><a href="qr-code.html">QR Code</a></li>
+                <li><a href="dictionary.html">Kamus</a></li>
+                <li><a href="memory-wall.html">Memory Wall</a></li>
+                <li><a href="login.html">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-book"></i> Kamus Istilah DKV</h1>
+            <p>Desain Komunikasi Visual - Lengkap dengan penjelasan</p>
+        </div>
+    </section>
+
+    <div class="dictionary-container">
+        <div class="dictionary-search">
+            <input type="text" id="searchDictionary" placeholder="🔍 Cari istilah...">
+        </div>
+
+        <div class="dictionary-letter-nav" id="letterNav"></div>
+
+        <div id="dictionaryList" class="dictionary-list"></div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Kelas 10 DKV 3 - SMK Negeri 1 Jakarta</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data Kamus DKV
+        const dictionaryData = [
+            { term: "Tipografi", definition: "Seni dan teknik menata huruf untuk membuat tulisan yang menarik dan mudah dibaca.", category: "Dasar", firstLetter: "T" },
+            { term: "Layout", definition: "Tata letak elemen desain pada suatu bidang untuk menciptakan komposisi yang harmonis.", category: "Dasar", firstLetter: "L" },
+            { term: "RGB", definition: "Model warna berbasis cahaya merah (Red), hijau (Green), biru (Blue) untuk media digital.", category: "Warna", firstLetter: "R" },
+            { term: "CMYK", definition: "Model warna berbasis tinta cyan, magenta, yellow, black untuk media cetak.", category: "Warna", firstLetter: "C" },
+            { term: "Vektor", definition: "Gambar berbasis garis dan kurva matematika yang tidak pecah saat diperbesar.", category: "Grafis", firstLetter: "V" },
+            { term: "Raster", definition: "Gambar berbasis pixel yang akan pecah jika diperbesar terlalu banyak.", category: "Grafis", firstLetter: "R" },
+            { term: "UI Design", definition: "User Interface Design - Desain antarmuka pengguna untuk aplikasi atau website.", category: "Digital", firstLetter: "U" },
+            { term: "UX Design", definition: "User Experience Design - Desain pengalaman pengguna agar nyaman menggunakan produk.", category: "Digital", firstLetter: "U" },
+            { term: "Branding", definition: "Proses membangun identitas merek termasuk logo, warna, dan karakter.", category: "Bisnis", firstLetter: "B" },
+            { term: "Logo", definition: "Simbol grafis yang mewakili identitas suatu perusahaan atau organisasi.", category: "Branding", firstLetter: "L" },
+            { term: "Mockup", definition: "Tampilan preview desain pada objek nyata seperti kaos, mug, atau kemasan.", category: "Presentasi", firstLetter: "M" },
+            { term: "Wireframe", definition: "Kerangka dasar desain tanpa warna dan detail untuk menentukan struktur.", category: "Proses", firstLetter: "W" },
+            { term: "Gradien", definition: "Perpaduan dua warna atau lebih secara bertahap.", category: "Warna", firstLetter: "G" },
+            { term: "Opacity", definition: "Tingkat transparansi suatu elemen desain dari 0% (transparan) hingga 100% (solid).", category: "Efek", firstLetter: "O" },
+            { term: "Hierarki", definition: "Tingkatan visual yang menunjukkan elemen mana yang paling penting.", category: "Prinsip", firstLetter: "H" },
+            { term: "White Space", definition: "Ruang kosong antar elemen desain untuk memberikan 'nafas'.", category: "Prinsip", firstLetter: "W" },
+            { term: "Kontras", definition: "Perbedaan mencolok antar elemen untuk menciptakan fokus.", category: "Prinsip", firstLetter: "K" },
+            { term: "Keseimbangan", definition: "Keseimbangan visual antar elemen desain.", category: "Prinsip", firstLetter: "K" },
+            { term: "Adobe Photoshop", definition: "Software editing gambar dan foto paling populer.", category: "Software", firstLetter: "A" },
+            { term: "Adobe Illustrator", definition: "Software pembuat desain vektor seperti logo dan ilustrasi.", category: "Software", firstLetter: "A" },
+            { term: "Figma", definition: "Software desain UI/UX berbasis cloud yang bisa kolaborasi tim.", category: "Software", firstLetter: "F" },
+            { term: "Canva", definition: "Platform desain grafis online dengan template siap pakai.", category: "Software", firstLetter: "C" },
+            { term: "Mascot", definition: "Karakter maskot yang mewakili brand atau organisasi.", category: "Ilustrasi", firstLetter: "M" },
+            { term: "Infografis", definition: "Penyajian data dalam bentuk visual yang menarik dan mudah dipahami.", category: "Media", firstLetter: "I" },
+            { term: "Poster", definition: "Media promosi visual berukuran besar yang ditempel di dinding.", category: "Media", firstLetter: "P" },
+            { term: "Brochure", definition: "Media promosi berbentuk lipatan untuk memberikan informasi.", category: "Media", firstLetter: "B" }
+        ];
+
+        let filteredData = [...dictionaryData];
+
+        function renderDictionary(data) {
+            const container = document.getElementById('dictionaryList');
+            if (!container) return;
+            
+            if (data.length === 0) {
+                container.innerHTML = '<div class="loading"><i class="fas fa-search"></i><p>Istilah tidak ditemukan</p></div>';
+                return;
+            }
+            
+            container.innerHTML = data.map(item => `
+                <div class="dictionary-item">
+                    <div class="dictionary-term">${item.term}</div>
+                    <div class="dictionary-definition">${item.definition}</div>
+                    <span class="dictionary-category">${item.category}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderLetterNav() {
+            const letters = [...new Set(dictionaryData.map(d => d.firstLetter))].sort();
+            const container = document.getElementById('letterNav');
+            if (!container) return;
+            
+            container.innerHTML = `<button class="letter-btn active" data-letter="all">All</button>` +
+                letters.map(letter => `<button class="letter-btn" data-letter="${letter}">${letter}</button>`).join('');
+            
+            document.querySelectorAll('.letter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.letter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const letter = btn.dataset.letter;
+                    if (letter === 'all') {
+                        filteredData = [...dictionaryData];
+                    } else {
+                        filteredData = dictionaryData.filter(d => d.firstLetter === letter);
+                    }
+                    renderDictionary(filteredData);
+                });
+            });
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById('searchDictionary');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const search = e.target.value.toLowerCase();
+                const activeLetter = document.querySelector('.letter-btn.active')?.dataset.letter || 'all';
+                let data = [...dictionaryData];
+                if (activeLetter !== 'all') {
+                    data = data.filter(d => d.firstLetter === activeLetter);
+                }
+                filteredData = data.filter(d => d.term.toLowerCase().includes(search) || d.definition.toLowerCase().includes(search));
+                renderDictionary(filteredData);
+            });
+        }
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                if (navLinks.classList.contains('active')) {
+                    navLinks.style.display = 'flex';
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '70px';
+                    navLinks.style.left = '0';
+                    navLinks.style.width = '100%';
+                    navLinks.style.backgroundColor = 'white';
+                    navLinks.style.padding = '20px';
+                    navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                } else {
+                    navLinks.style.display = '';
+                }
+            });
+        }
+
+        // Inisialisasi
+        renderLetterNav();
+        renderDictionary(dictionaryData);
+    </script>
+</body>
+</html>

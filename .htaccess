@@ -1,0 +1,67 @@
+# ============================================
+# HTACCESS - SEO OPTIMIZATION
+# Untuk website kelas 10 DKV 3
+# ============================================
+
+# Enable Rewrite Engine
+RewriteEngine On
+
+# Force HTTPS (uncomment jika pakai SSL)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# Redirect non-www to www (pilih salah satu)
+# RewriteCond %{HTTP_HOST} !^www\. [NC]
+# RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+# Redirect www to non-www
+# RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+# RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+# Remove trailing slash
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [R=301,L]
+
+# Set default page
+DirectoryIndex index.html
+
+# Custom error pages
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+
+# Cache Control untuk performa
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType text/html "access plus 1 day"
+</IfModule>
+
+# Compress file (Gzip)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "DENY"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Block access to sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "^(config|database|storage)\.json$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

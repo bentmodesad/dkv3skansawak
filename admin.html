@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | 10 DKV 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f1f5f9;
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #4f46e5, #818cf8);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .logo-text span {
+            color: #4f46e5;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f1f5f9;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .user-name i {
+            color: #4f46e5;
+        }
+
+        .btn-logout {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-logout:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        /* ========== MAIN CONTENT ========== */
+        .main-content {
+            margin-top: 80px;
+            padding: 30px 0;
+        }
+
+        /* Dashboard Cards */
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4f46e5, #818cf8);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .card-info h3 {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+
+        .card-info .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e293b;
+        }
+
+        /* Tabs */
+        .admin-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .admin-tab {
+            padding: 12px 28px;
+            background: none;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            color: #64748b;
+            transition: all 0.3s;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .admin-tab:hover {
+            color: #4f46e5;
+        }
+
+        .admin-tab.active {
+            color: #4f46e5;
+            border-bottom: 2px solid #4f46e5;
+        }
+
+        /* Sections */
+        .admin-section {
+            display: none;
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: #4f46e5;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            color: white;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+            padding: 6px 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .btn-edit {
+            background: #f59e0b;
+            color: white;
+            padding: 6px 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+
+        .btn-edit:hover {
+            background: #d97706;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+        }
+
+        /* Members Grid */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .member-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .member-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .member-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #4f46e5;
+            color: white;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+            border: 2px solid white;
+            z-index: 10;
+        }
+
+        .member-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .member-info {
+            padding: 16px;
+            text-align: center;
+        }
+
+        .member-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .member-role {
+            color: #4f46e5;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .member-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 0 16px 16px;
+        }
+
+        /* Photos Grid */
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .photo-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            background: #f1f5f9;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            padding: 15px;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .photo-card:hover .photo-overlay {
+            transform: translateY(0);
+        }
+
+        .photo-overlay h4 {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .photo-overlay p {
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+
+        .photo-delete {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s;
+        }
+
+        .photo-delete:hover {
+            background: #dc2626;
+            transform: scale(1.05);
+        }
+
+        /* Preview Image */
+        .image-preview {
+            margin-top: 10px;
+            max-width: 150px;
+        }
+
+        .image-preview img {
+            width: 100%;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+        }
+
+        /* Alert */
+        .alert {
+            padding: 14px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .alert.success {
+            background: #d1fae5;
+            color: #059669;
+            display: flex;
+        }
+
+        .alert.error {
+            background: #fee2e2;
+            color: #dc2626;
+            display: flex;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px;
+            color: #94a3b8;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            color: #cbd5e1;
+        }
+
+        .empty-state p {
+            margin-bottom: 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .dashboard-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .admin-tab {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">🎨</div>
+                <div class="logo-text">10 <span>DKV 3</span></div>
+            </div>
+            <div class="user-info">
+                <div class="user-name">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="adminName">Admin</span>
+                </div>
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <!-- Dashboard Cards -->
+            <div class="dashboard-cards">
+                <div class="dashboard-card">
+                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                    <div class="card-info">
+                        <h3>Total Anggota</h3>
+                        <div class="number" id="totalMembers">0</div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-icon"><i class="fas fa-images"></i></div>
+                    <div class="card-info">
+                        <h3>Total Foto</h3>
+                        <div class="number" id="totalPhotos">0</div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                    <div class="card-info">
+                        <h3>Laki-laki</h3>
+                        <div class="number" id="maleCount">0</div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-icon"><i class="fas fa-female"></i></div>
+                    <div class="card-info">
+                        <h3>Perempuan</h3>
+                        <div class="number" id="femaleCount">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="admin-tabs">
+                <button class="admin-tab active" onclick="showTab('members')">
+                    <i class="fas fa-users"></i> Anggota
+                </button>
+                <button class="admin-tab" onclick="showTab('photos')">
+                    <i class="fas fa-images"></i> Foto
+                </button>
+                <button class="admin-tab" onclick="showTab('settings')">
+                    <i class="fas fa-cog"></i> Pengaturan
+                </button>
+                <button class="admin-tab" onclick="showTab('backup')">
+                    <i class="fas fa-database"></i> Backup
+                </button>
+            </div>
+
+            <div id="alertMessage" class="alert"></div>
+
+            <!-- TAB ANGGOTA -->
+            <div id="membersSection" class="admin-section active">
+                <div class="section-title">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Tambah Anggota Baru</span>
+                </div>
+                <form id="addMemberForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nama Lengkap</label>
+                            <input type="text" id="memberName" placeholder="Contoh: Ahmad Fauzi" required>
+                        </div>
+                        <div class="form-group">
+                            <label>No Absen</label>
+                            <input type="text" id="memberAbsen" placeholder="01, 02, 03" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Jenis Kelamin</label>
+                            <select id="memberGender">
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Jabatan</label>
+                            <select id="memberRole">
+                                <option value="Anggota">Anggota</option>
+                                <option value="Ketua Kelas">Ketua Kelas</option>
+                                <option value="Wakil Ketua">Wakil Ketua</option>
+                                <option value="Sekretaris">Sekretaris</option>
+                                <option value="Bendahara">Bendahara</option>
+                                <option value="Seksi Kebersihan">Seksi Kebersihan</option>
+                                <option value="Seksi Keamanan">Seksi Keamanan</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Foto (URL atau kosongkan untuk avatar otomatis)</label>
+                        <input type="text" id="memberPhoto" placeholder="https://...">
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-save"></i> Tambah Anggota
+                    </button>
+                </form>
+
+                <div class="section-title" style="margin-top: 40px;">
+                    <i class="fas fa-list"></i>
+                    <span>Daftar Anggota</span>
+                </div>
+                <div id="membersList" class="members-grid"></div>
+            </div>
+
+            <!-- TAB FOTO -->
+            <div id="photosSection" class="admin-section">
+                <div class="section-title">
+                    <i class="fas fa-upload"></i>
+                    <span>Upload Foto Baru</span>
+                </div>
+                <form id="addPhotoForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Judul Foto</label>
+                            <input type="text" id="photoTitle" placeholder="Contoh: Upacara Bendera" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Kategori</label>
+                            <select id="photoCategory">
+                                <option value="academic">📚 Akademik</option>
+                                <option value="event">🎉 Kegiatan</option>
+                                <option value="fun">😄 Kebersamaan</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>URL Foto</label>
+                        <input type="text" id="photoUrl" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label>Atau Upload File</label>
+                        <input type="file" id="photoFile" accept="image/*">
+                        <div id="photoPreview" class="image-preview"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi (Opsional)</label>
+                        <textarea id="photoDesc" rows="3" placeholder="Ceritakan tentang foto ini..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-cloud-upload-alt"></i> Upload Foto
+                    </button>
+                </form>
+
+                <div class="section-title" style="margin-top: 40px;">
+                    <i class="fas fa-images"></i>
+                    <span>Daftar Foto</span>
+                </div>
+                <div id="photosList" class="photos-grid"></div>
+            </div>
+
+            <!-- TAB PENGATURAN -->
+            <div id="settingsSection" class="admin-section">
+                <div class="section-title">
+                    <i class="fas fa-sliders-h"></i>
+                    <span>Pengaturan Website</span>
+                </div>
+                <form id="settingsForm">
+                    <div class="form-group">
+                        <label>Pengumuman Website</label>
+                        <textarea id="websiteAnnouncement" rows="4" placeholder="Tulis pengumuman..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Kelas</label>
+                        <input type="text" id="className" placeholder="10 DKV 3">
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Sekolah</label>
+                        <input type="text" id="schoolName" placeholder="SMK Negeri 1 Cluwak">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Kontak</label>
+                        <input type="email" id="contactEmail" placeholder="dkv3@sekolah.sch.id">
+                    </div>
+                    <div class="form-group">
+                        <label>Nomor WhatsApp</label>
+                        <input type="text" id="contactPhone" placeholder="+62 812-3456-7890">
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-save"></i> Simpan Pengaturan
+                    </button>
+                </form>
+            </div>
+
+            <!-- TAB BACKUP -->
+            <div id="backupSection" class="admin-section">
+                <div class="section-title">
+                    <i class="fas fa-database"></i>
+                    <span>Backup & Restore Data</span>
+                </div>
+                
+                <div style="background: #f1f5f9; border-radius: 16px; padding: 24px; margin-bottom: 24px;">
+                    <h3 style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-download" style="color: #4f46e5;"></i> Backup Data
+                    </h3>
+                    <p style="color: #64748b; margin-bottom: 16px;">Download semua data (anggota, foto, pengaturan) ke file JSON.</p>
+                    <button id="backupData" class="btn-submit" style="background: #10b981;">
+                        <i class="fas fa-download"></i> Download Backup
+                    </button>
+                </div>
+
+                <div style="background: #f1f5f9; border-radius: 16px; padding: 24px; margin-bottom: 24px;">
+                    <h3 style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-upload" style="color: #4f46e5;"></i> Restore Data
+                    </h3>
+                    <p style="color: #64748b; margin-bottom: 16px;">Upload file backup JSON untuk mengembalikan data.</p>
+                    <input type="file" id="restoreFile" accept=".json" style="margin-bottom: 16px;">
+                    <button id="restoreData" class="btn-submit" style="background: #f59e0b;">
+                        <i class="fas fa-upload"></i> Restore Data
+                    </button>
+                </div>
+
+                <div style="background: #fef2f2; border-radius: 16px; padding: 24px;">
+                    <h3 style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: #dc2626;">
+                        <i class="fas fa-trash-alt"></i> Reset Semua Data
+                    </h3>
+                    <p style="color: #64748b; margin-bottom: 16px;">PERINGATAN: Tindakan ini akan menghapus SEMUA data (anggota, foto, pengaturan). Data tidak dapat dikembalikan!</p>
+                    <button id="resetData" class="btn-danger" style="padding: 12px 28px;">
+                        <i class="fas fa-trash-alt"></i> Reset Semua Data
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script>
+        // Cek login
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+
+        // Set admin name
+        const adminName = localStorage.getItem('username') || 'Admin';
+        document.getElementById('adminName').textContent = adminName;
+
+        let members = [];
+        let photos = [];
+
+        function showAlert(msg, type) {
+            const alert = document.getElementById('alertMessage');
+            alert.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${msg}`;
+            alert.className = `alert ${type}`;
+            setTimeout(() => { alert.className = 'alert'; }, 3000);
+        }
+
+        function updateDashboard() {
+            document.getElementById('totalMembers').textContent = members.length;
+            document.getElementById('totalPhotos').textContent = photos.length;
+            document.getElementById('maleCount').textContent = members.filter(m => m.gender === 'Laki-laki').length;
+            document.getElementById('femaleCount').textContent = members.filter(m => m.gender === 'Perempuan').length;
+        }
+
+        async function loadData() {
+            if (typeof storage === 'undefined') {
+                console.error('Storage not loaded');
+                return;
+            }
+            members = storage.getMembers();
+            photos = storage.getPhotos();
+            renderMembers();
+            renderPhotos();
+            updateDashboard();
+        }
+
+        function renderMembers() {
+            const container = document.getElementById('membersList');
+            if (!container) return;
+            
+            if (members.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-users"></i>
+                        <p>Belum ada anggota</p>
+                        <p style="font-size: 0.8rem;">Silakan tambah anggota baru</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = members.map(m => `
+                <div class="member-card">
+                    <div class="member-badge">${m.noAbsen}</div>
+                    <img src="${m.photo || 'https://ui-avatars.com/api/?background=4f46e5&color=fff&name=' + encodeURIComponent(m.name)}" 
+                         class="member-image" 
+                         onerror="this.src='https://ui-avatars.com/api/?background=4f46e5&color=fff&name=${m.name}'">
+                    <div class="member-info">
+                        <div class="member-name">${escapeHtml(m.name)}</div>
+                        <div class="member-role">${m.role}</div>
+                    </div>
+                    <div class="member-actions">
+                        <button class="btn-edit" onclick="editMember('${m.id}')"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="btn-danger" onclick="deleteMember('${m.id}')"><i class="fas fa-trash"></i> Hapus</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderPhotos() {
+            const container = document.getElementById('photosList');
+            if (!container) return;
+            
+            if (photos.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-images"></i>
+                        <p>Belum ada foto</p>
+                        <p style="font-size: 0.8rem;">Silakan upload foto baru</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = photos.map(p => `
+                <div class="photo-card" onclick="viewPhoto('${p.image}')">
+                    <img src="${p.image}" alt="${p.title}" onerror="this.src='https://placehold.co/600x400/4f46e5/white?text=No+Image'">
+                    <div class="photo-overlay">
+                        <h4>${escapeHtml(p.title)}</h4>
+                        <p>${p.category === 'academic' ? 'Akademik' : p.category === 'event' ? 'Kegiatan' : 'Kebersamaan'}</p>
+                        <p>${new Date(p.date).toLocaleDateString('id-ID')}</p>
+                    </div>
+                    <button class="photo-delete" onclick="event.stopPropagation(); deletePhoto('${p.id}')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function viewPhoto(src) {
+            window.open(src, '_blank');
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        // Tambah Anggota
+        document.getElementById('addMemberForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('memberName').value;
+            const noAbsen = document.getElementById('memberAbsen').value.padStart(2, '0');
+            const gender = document.getElementById('memberGender').value;
+            const role = document.getElementById('memberRole').value;
+            let photo = document.getElementById('memberPhoto').value;
+            
+            if (!photo) photo = `https://ui-avatars.com/api/?background=4f46e5&color=fff&name=${encodeURIComponent(name)}`;
+            
+            await storage.addMember({ name, noAbsen, gender, role, photo });
+            await loadData();
+            showAlert('Anggota berhasil ditambahkan!', 'success');
+            document.getElementById('addMemberForm').reset();
+        });
+
+        // Edit Anggota
+        window.editMember = async (id) => {
+            const member = members.find(m => m.id === id);
+            const newName = prompt('Edit Nama:', member.name);
+            const newRole = prompt('Edit Jabatan:', member.role);
+            if (newName && newRole) {
+                await storage.updateMember(id, { name: newName, role: newRole });
+                await loadData();
+                showAlert('Anggota berhasil diupdate!', 'success');
+            }
+        };
+
+        // Hapus Anggota
+        window.deleteMember = async (id) => {
+            if (confirm('Yakin ingin menghapus anggota ini?')) {
+                await storage.deleteMember(id);
+                await loadData();
+                showAlert('Anggota berhasil dihapus!', 'success');
+            }
+        };
+
+        // Preview foto
+        document.getElementById('photoFile').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            const preview = document.getElementById('photoPreview');
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    preview.innerHTML = `<img src="${event.target.result}" alt="Preview">`;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.innerHTML = '';
+            }
+        });
+
+        // Upload Foto
+        document.getElementById('addPhotoForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const title = document.getElementById('photoTitle').value;
+            const category = document.getElementById('photoCategory').value;
+            const description = document.getElementById('photoDesc').value;
+            const photoUrl = document.getElementById('photoUrl').value;
+            const photoFile = document.getElementById('photoFile').files[0];
+            
+            let image = photoUrl;
+            if (photoFile) {
+                image = await fileToBase64(photoFile);
+            }
+            
+            if (!image) {
+                showAlert('Masukkan URL atau pilih file gambar!', 'error');
+                return;
+            }
+            
+            await storage.addPhoto({ title, category, description, image });
+            await loadData();
+            showAlert('Foto berhasil diupload!', 'success');
+            document.getElementById('addPhotoForm').reset();
+            document.getElementById('photoPreview').innerHTML = '';
+        });
+
+        // Hapus Foto
+        window.deletePhoto = async (id) => {
+            if (confirm('Yakin ingin menghapus foto ini?')) {
+                await storage.deletePhoto(id);
+                await loadData();
+                showAlert('Foto berhasil dihapus!', 'success');
+            }
+        };
+
+        // Settings
+        function loadSettings() {
+            if (typeof storage === 'undefined') return;
+            const settings = storage.getSettings();
+            document.getElementById('websiteAnnouncement').value = settings.announcement || '';
+            document.getElementById('className').value = settings.className || '10 DKV 3';
+            document.getElementById('schoolName').value = settings.schoolName || 'SMK Negeri 1 Cluwak';
+            document.getElementById('contactEmail').value = settings.contactEmail || 'dkv3@smkn1cluwak.sch.id';
+            document.getElementById('contactPhone').value = settings.contactPhone || '+62 812-3456-7890';
+        }
+
+        document.getElementById('settingsForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await storage.updateSettings({
+                announcement: document.getElementById('websiteAnnouncement').value,
+                className: document.getElementById('className').value,
+                schoolName: document.getElementById('schoolName').value,
+                contactEmail: document.getElementById('contactEmail').value,
+                contactPhone: document.getElementById('contactPhone').value
+            });
+            showAlert('Pengaturan berhasil disimpan!', 'success');
+        });
+
+        // Backup
+        document.getElementById('backupData').addEventListener('click', () => {
+            const data = {
+                members: storage.getMembers(),
+                photos: storage.getPhotos(),
+                settings: storage.getSettings(),
+                backupDate: new Date().toISOString()
+            };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `dkv3_backup_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showAlert('Backup berhasil diunduh!', 'success');
+        });
+
+        // Restore
+        document.getElementById('restoreData').addEventListener('click', async () => {
+            const file = document.getElementById('restoreFile').files[0];
+            if (!file) {
+                showAlert('Pilih file backup terlebih dahulu!', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = async (event) => {
+                try {
+                    const data = JSON.parse(event.target.result);
+                    if (data.members) storage.setMembers(data.members);
+                    if (data.photos) storage.setPhotos(data.photos);
+                    if (data.settings) storage.setSettings(data.settings);
+                    await loadData();
+                    loadSettings();
+                    showAlert('Restore data berhasil!', 'success');
+                } catch (error) {
+                    showAlert('File backup tidak valid!', 'error');
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        // Reset
+        document.getElementById('resetData').addEventListener('click', async () => {
+            if (confirm('PERINGATAN: Ini akan menghapus SEMUA data! Yakin?')) {
+                if (confirm('Apakah Anda benar-benar yakin? Data tidak dapat dikembalikan!')) {
+                    await storage.resetAll();
+                    await loadData();
+                    loadSettings();
+                    showAlert('Semua data telah direset!', 'success');
+                }
+            }
+        });
+
+        function showTab(tab) {
+            document.querySelectorAll('.admin-tab').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.admin-section').forEach(section => section.classList.remove('active'));
+            
+            if (tab === 'members') {
+                document.querySelectorAll('.admin-tab')[0].classList.add('active');
+                document.getElementById('membersSection').classList.add('active');
+            } else if (tab === 'photos') {
+                document.querySelectorAll('.admin-tab')[1].classList.add('active');
+                document.getElementById('photosSection').classList.add('active');
+            } else if (tab === 'settings') {
+                document.querySelectorAll('.admin-tab')[2].classList.add('active');
+                document.getElementById('settingsSection').classList.add('active');
+                loadSettings();
+            } else if (tab === 'backup') {
+                document.querySelectorAll('.admin-tab')[3].classList.add('active');
+                document.getElementById('backupSection').classList.add('active');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('rememberMe');
+            localStorage.removeItem('username');
+            localStorage.removeItem('loginTime');
+            window.location.href = 'login.html';
+        }
+
+        // Inisialisasi
+        loadData();
+        loadSettings();
+    </script>
+</body>
+</html>

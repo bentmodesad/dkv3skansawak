@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat | 10 DKV 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fa;
+        }
+
+        .navbar {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        .logo span {
+            color: #333;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #4f46e5;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            padding: 100px 0 40px;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .chat-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .chat-header {
+            background: #4f46e5;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .online-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .online-dot {
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .chat-messages {
+            height: 450px;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8fafc;
+        }
+
+        .chat-message {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            background: #4f46e5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .chat-bubble {
+            flex: 1;
+            background: white;
+            padding: 12px 15px;
+            border-radius: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .chat-name {
+            font-weight: 600;
+            color: #4f46e5;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+        }
+
+        .chat-text {
+            color: #333;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+        .chat-time {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            text-align: right;
+            margin-top: 5px;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 20px;
+            gap: 10px;
+            border-top: 1px solid #e2e8f0;
+            background: white;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 50px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .chat-input input:focus {
+            border-color: #4f46e5;
+        }
+
+        .chat-input button {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .chat-input button:hover {
+            background: #4338ca;
+        }
+
+        .info-bar {
+            background: #f1f5f9;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .sync-status {
+            background: #e0e7ff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: #4f46e5;
+        }
+
+        .footer {
+            background: #0f172a;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .chat-container {
+                margin: 20px;
+            }
+            .chat-messages {
+                height: 350px;
+            }
+            .chat-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">🎨 10 <span>DKV 3</span></div>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="anggota.html">Anggota</a></li>
+                <li><a href="album.html">Album</a></li>
+                <li><a href="jadwal.html">Jadwal</a></li>
+                <li><a href="chat.html">Chat</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="login.html">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-comments"></i> Chat Kelas</h1>
+            <p>Ngobrol dengan teman-teman 10 DKV 3 - Semua perangkat bisa lihat!</p>
+        </div>
+    </section>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="online-status">
+                <span class="online-dot"></span>
+                <span>Online</span>
+            </div>
+            <div class="sync-status" id="syncStatus">
+                <i class="fas fa-cloud"></i> Tersimpan di Cloud
+            </div>
+            <button onclick="gantiNama()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 8px 15px; border-radius: 20px; cursor: pointer;">
+                <i class="fas fa-user-edit"></i> Ganti Nama
+            </button>
+        </div>
+        <div id="chatMessages" class="chat-messages">
+            <div style="text-align:center;padding:40px;">
+                <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #4f46e5;"></i>
+                <p style="margin-top: 10px;">Memuat chat...</p>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="pesanInput" placeholder="Ketik pesan..." onkeypress="if(event.key==='Enter') kirimPesan()">
+            <button onclick="kirimPesan()"><i class="fas fa-paper-plane"></i> Kirim</button>
+        </div>
+        <div class="info-bar">
+            <i class="fas fa-cloud-upload-alt"></i> Pesan tersimpan di cloud | Bisa dilihat semua anggota kelas
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Kelas 10 DKV 3 - SMK Negeri 1 Cluwak</p>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== CHAT DENGAN CLOUD ====================
+        
+        // Konfigurasi jsonbin.io
+        const BIN_ID = '672f9e8aad19ca34f8b9e4b7';
+        const API_KEY = '$2a$10$Gp/0eXzyHGESNT/T72Di3OuvWifb.ebc.aeOmGJgarDawFOM9IY/e';
+        const ACCESS_KEY = '$2a$10$uaKOY7jVAZxvHGSN/2uRQuxrxfmlMRsD7dUMGwp.x0cDYSBEWxuT2';
+        
+        let daftarPesan = [];
+        let namaPengguna = localStorage.getItem('namaChat');
+        
+        if (!namaPengguna) {
+            namaPengguna = "Siswa DKV";
+            localStorage.setItem('namaChat', namaPengguna);
+        }
+
+        // Load chat dari cloud
+        async function loadChatDariCloud() {
+            try {
+                const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                    method: 'GET',
+                    headers: {
+                        'X-Master-Key': API_KEY,
+                        'X-Access-Key': ACCESS_KEY
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const cloudData = data.record;
+                    
+                    if (cloudData && cloudData.chat && cloudData.chat.length > 0) {
+                        daftarPesan = cloudData.chat;
+                    } else {
+                        // Data default jika kosong
+                        daftarPesan = [
+                            { id: 1, pengirim: "Admin DKV", teks: "Selamat datang di Chat Kelas 10 DKV 3! 👋", waktu: new Date().toISOString() },
+                            { id: 2, pengirim: "Admin DKV", teks: "Chat ini tersimpan di CLOUD! Semua anggota kelas bisa lihat", waktu: new Date(Date.now() - 1000).toISOString() },
+                            { id: 3, pengirim: "Admin DKV", teks: "Ganti nama kamu dengan klik tombol 'Ganti Nama'", waktu: new Date(Date.now() - 2000).toISOString() }
+                        ];
+                        await simpanChatKeCloud();
+                    }
+                    tampilkanPesan();
+                    document.getElementById('syncStatus').innerHTML = '<i class="fas fa-check-circle"></i> Tersimpan di Cloud';
+                } else {
+                    throw new Error('Gagal load dari cloud');
+                }
+            } catch (error) {
+                console.error('Error load dari cloud:', error);
+                document.getElementById('syncStatus').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Mode Offline (data lokal)';
+                // Fallback ke localStorage
+                loadChatDariLokal();
+            }
+        }
+
+        // Load dari localStorage (fallback)
+        function loadChatDariLokal() {
+            const saved = localStorage.getItem('chatPesan');
+            if (saved) {
+                try {
+                    daftarPesan = JSON.parse(saved);
+                } catch(e) {
+                    daftarPesan = [];
+                }
+            }
+            if (daftarPesan.length === 0) {
+                daftarPesan = [
+                    { id: 1, pengirim: "Admin DKV", teks: "Selamat datang di Chat Kelas!", waktu: new Date().toISOString() }
+                ];
+            }
+            tampilkanPesan();
+        }
+
+        // Simpan chat ke cloud
+        async function simpanChatKeCloud() {
+            try {
+                // Ambil data lengkap dari cloud
+                const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                    method: 'GET',
+                    headers: {
+                        'X-Master-Key': API_KEY,
+                        'X-Access-Key': ACCESS_KEY
+                    }
+                });
+                
+                let cloudData = {};
+                if (response.ok) {
+                    const data = await response.json();
+                    cloudData = data.record || {};
+                }
+                
+                // Update chat
+                cloudData.chat = daftarPesan;
+                cloudData.lastUpdate = new Date().toISOString();
+                
+                // Simpan kembali
+                const saveResponse = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': API_KEY,
+                        'X-Access-Key': ACCESS_KEY
+                    },
+                    body: JSON.stringify(cloudData)
+                });
+                
+                if (saveResponse.ok) {
+                    console.log('Chat tersimpan ke cloud');
+                    document.getElementById('syncStatus').innerHTML = '<i class="fas fa-check-circle"></i> Tersimpan di Cloud';
+                    // Simpan juga ke lokal
+                    localStorage.setItem('chatPesan', JSON.stringify(daftarPesan));
+                }
+            } catch (error) {
+                console.error('Error simpan ke cloud:', error);
+                document.getElementById('syncStatus').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Gagal simpan';
+                // Simpan ke lokal saja
+                localStorage.setItem('chatPesan', JSON.stringify(daftarPesan));
+            }
+        }
+
+        // Tampilkan pesan
+        function tampilkanPesan() {
+            const container = document.getElementById('chatMessages');
+            if (!container) return;
+
+            if (daftarPesan.length === 0) {
+                container.innerHTML = '<div style="text-align:center;padding:40px;color:#94a3b8;">Belum ada pesan. Kirim pesan pertama!</div>';
+                return;
+            }
+
+            function warnaAvatar(nama) {
+                const warna = ['#4f46e5', '#ec489a', '#10b981', '#f59e0b', '#ef4444', '#06b6d4', '#8b5cf6'];
+                let hash = 0;
+                for (let i = 0; i < nama.length; i++) {
+                    hash = ((hash << 5) - hash) + nama.charCodeAt(i);
+                    hash = hash & hash;
+                }
+                return warna[Math.abs(hash) % warna.length];
+            }
+
+            function formatWaktu(waktu) {
+                const tgl = new Date(waktu);
+                const now = new Date();
+                const selisih = now - tgl;
+                
+                if (selisih < 60000) return 'Baru saja';
+                if (selisih < 3600000) return Math.floor(selisih / 60000) + ' menit lalu';
+                if (selisih < 86400000) return Math.floor(selisih / 3600000) + ' jam lalu';
+                return tgl.toLocaleDateString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            }
+
+            function escapeHtml(teks) {
+                const div = document.createElement('div');
+                div.textContent = teks;
+                return div.innerHTML;
+            }
+
+            container.innerHTML = daftarPesan.map(p => `
+                <div class="chat-message">
+                    <div class="chat-avatar" style="background: ${warnaAvatar(p.pengirim)}">
+                        ${p.pengirim.charAt(0).toUpperCase()}
+                    </div>
+                    <div class="chat-bubble">
+                        <div class="chat-name">${escapeHtml(p.pengirim)} 
+                            <span style="font-size: 0.7rem; color: #94a3b8; font-weight: normal;">
+                                ${formatWaktu(p.waktu)}
+                            </span>
+                        </div>
+                        <div class="chat-text">${escapeHtml(p.teks)}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Kirim pesan
+        async function kirimPesan() {
+            const input = document.getElementById('pesanInput');
+            const teks = input.value.trim();
+            if (!teks) return;
+
+            const pesanBaru = {
+                id: Date.now(),
+                pengirim: localStorage.getItem('namaChat') || 'Siswa DKV',
+                teks: teks,
+                waktu: new Date().toISOString()
+            };
+
+            daftarPesan.push(pesanBaru);
+            
+            if (daftarPesan.length > 200) {
+                daftarPesan = daftarPesan.slice(-200);
+            }
+
+            await simpanChatKeCloud();
+            tampilkanPesan();
+            input.value = '';
+        }
+
+        // Ganti nama
+        function gantiNama() {
+            const namaBaru = prompt('Masukkan nama kamu:', localStorage.getItem('namaChat') || '');
+            if (namaBaru && namaBaru.trim()) {
+                localStorage.setItem('namaChat', namaBaru.trim());
+                namaPengguna = namaBaru.trim();
+                
+                const notif = {
+                    id: Date.now(),
+                    pengirim: 'System',
+                    teks: `${namaBaru.trim()} bergabung ke chat!`,
+                    waktu: new Date().toISOString()
+                };
+                daftarPesan.push(notif);
+                simpanChatKeCloud();
+                tampilkanPesan();
+            }
+        }
+
+        // Auto refresh setiap 3 detik
+        let autoRefresh;
+        function startAutoRefresh() {
+            if (autoRefresh) clearInterval(autoRefresh);
+            autoRefresh = setInterval(async () => {
+                await loadChatDariCloud();
+            }, 3000);
+        }
+
+        // Mobile menu
+        const toggleBtn = document.getElementById('menuToggle');
+        const menuNav = document.getElementById('navLinks');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                menuNav.classList.toggle('active');
+                if (menuNav.classList.contains('active')) {
+                    menuNav.style.display = 'flex';
+                    menuNav.style.flexDirection = 'column';
+                    menuNav.style.position = 'absolute';
+                    menuNav.style.top = '70px';
+                    menuNav.style.left = '0';
+                    menuNav.style.width = '100%';
+                    menuNav.style.backgroundColor = 'white';
+                    menuNav.style.padding = '20px';
+                    menuNav.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                } else {
+                    menuNav.style.display = '';
+                }
+            });
+        }
+
+        // Jalankan
+        loadChatDariCloud();
+        startAutoRefresh();
+        console.log('Chat cloud siap! Nama:', namaPengguna);
+    <!-- Dark Mode Toggle Button -->
+<button class="dark-mode-toggle" id="darkModeToggle" onclick="toggleDarkMode()">
+    <i class="fas fa-moon"></i>
+</button>
+    </script>
+</body>
+</html>

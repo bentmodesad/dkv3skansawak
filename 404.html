@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Tidak Ditemukan | 10 DKV 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .error-container {
+            text-align: center;
+            color: white;
+            max-width: 600px;
+        }
+        .error-code {
+            font-size: 8rem;
+            font-weight: 800;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+        .error-title {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+        .error-message {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 32px;
+        }
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #4f46e5;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .suggestions {
+            margin-top: 40px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .suggestions a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .suggestions a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        @media (max-width: 480px) {
+            .error-code { font-size: 5rem; }
+            .error-title { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <div class="error-title">
+            <i class="fas fa-compass"></i> Halaman Tidak Ditemukan
+        </div>
+        <div class="error-message">
+            Maaf, halaman yang Anda cari tidak tersedia atau telah dipindahkan.
+        </div>
+        <a href="index.html" class="btn-home">
+            <i class="fas fa-home"></i> Kembali ke Beranda
+        </a>
+        <div class="suggestions">
+            <a href="anggota.html"><i class="fas fa-users"></i> Anggota</a>
+            <a href="album.html"><i class="fas fa-images"></i> Album</a>
+            <a href="jadwal.html"><i class="fas fa-calendar"></i> Jadwal</a>
+            <a href="chat.html"><i class="fas fa-comments"></i> Chat</a>
+        </div>
+    </div>
+</body>
+</html>

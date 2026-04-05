@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>10 DKV 3 | SMK Negeri 1 Cluwak</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="loader"></div>
+        <div class="loader-text">Loading...</div>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- FLOATING WHATSAPP -->
+    <a href="https://wa.me/6289517976358?text=Halo%20Admin%20Kelas%2010%20DKV%203" 
+       class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">🎨</div>
+                <div class="logo-text">10 <span>DKV 3</span></div>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="anggota.html">Anggota</a></li>
+                <li><a href="album.html">Album</a></li>
+                <li><a href="jadwal.html">Jadwal</a></li>
+                <li><a href="chat.html">Chat</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="login.html">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <div class="hero-badge" data-aos="zoom-in">
+                <i class="fas fa-graduation-cap"></i> Kelas Desain Komunikasi Visual
+            </div>
+            <h1>
+                Selamat Datang di <br>
+                <span class="typing-text" id="typingText"></span>
+            </h1>
+            <p data-aos="fade-up" data-aos-delay="200">Tempat inspirasi, kreativitas, dan kebersamaan siswa-siswi desain grafis</p>
+            <div class="hero-buttons" data-aos="fade-up" data-aos-delay="300">
+                <a href="anggota.html" class="btn btn-primary">
+                    <i class="fas fa-users"></i> Lihat Anggota
+                </a>
+                <a href="album.html" class="btn btn-outline">
+                    <i class="fas fa-images"></i> Lihat Album
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
+                    <div class="stat-number" id="totalMembers">0</div>
+                    <div class="stat-label">Total Siswa</div>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-icon"><i class="fas fa-chalkboard-user"></i></div>
+                    <div class="stat-number" id="totalTeachers">12</div>
+                    <div class="stat-label">Guru Pengajar</div>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-icon"><i class="fas fa-images"></i></div>
+                    <div class="stat-number" id="totalPhotos">0</div>
+                    <div class="stat-label">Dokumentasi</div>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-icon"><i class="fas fa-trophy"></i></div>
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Prestasi</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHART -->
+    <section class="chart-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Statistik Kelas</h2>
+            <div class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Data komposisi siswa berdasarkan jenis kelamin</div>
+            <div class="chart-container" data-aos="zoom-in" data-aos-delay="200">
+                <canvas id="genderChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Fitur Unggulan</h2>
+            <div class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Berbagai fasilitas untuk mendukung aktivitas kelas</div>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon"><i class="fas fa-users"></i></div>
+                    <h3>Data Anggota</h3>
+                    <p>Informasi lengkap semua anggota kelas</p>
+                    <a href="anggota.html" class="feature-link">Lihat Anggota →</a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="feature-icon"><i class="fas fa-images"></i></div>
+                    <h3>Galeri Foto</h3>
+                    <p>Dokumentasi kegiatan kelas</p>
+                    <a href="album.html" class="feature-link">Lihat Album →</a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h3>Jadwal Pelajaran</h3>
+                    <p>Sistem 2 minggu - Praktik & Teori</p>
+                    <a href="jadwal.html" class="feature-link">Lihat Jadwal →</a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="250">
+                    <div class="feature-icon"><i class="fas fa-comments"></i></div>
+                    <h3>Chat Real-time</h3>
+                    <p>Ngobrol dengan anggota kelas</p>
+                    <a href="chat.html" class="feature-link">Buka Chat →</a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon"><i class="fas fa-users"></i></div>
+                    <h3>Forum Diskusi</h3>
+                    <p>Diskusi per topik bersama teman</p>
+                    <a href="forum.html" class="feature-link">Buka Forum →</a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="350">
+                    <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                    <h3>AI Chatbot</h3>
+                    <p>Tanya jawab tentang kelas</p>
+                    <a href="chatbot.html" class="feature-link">Coba AI →</a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon"><i class="fas fa-box"></i></div>
+                    <h3>Saran Box</h3>
+                    <p>Sampaikan saran & kritik anonim</p>
+                    <a href="saran-box.html" class="feature-link">Kirim Saran →</a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="450">
+                    <div class="feature-icon"><i class="fas fa-music"></i></div>
+                    <h3>Music Player</h3>
+                    <p>Dengarkan playlist lagu kelas</p>
+                    <a href="music-player.html" class="feature-link">Putar Musik →</a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon"><i class="fas fa-qrcode"></i></div>
+                    <h3>QR Code Dinamis</h3>
+                    <p>Scan QR untuk akses cepat</p>
+                    <a href="qr-code.html" class="feature-link">Buat QR →</a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="550">
+                    <div class="feature-icon"><i class="fas fa-book"></i></div>
+                    <h3>Kamus DKV</h3>
+                    <p>Istilah Desain Komunikasi Visual</p>
+                    <a href="dictionary.html" class="feature-link">Lihat Kamus →</a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-icon"><i class="fas fa-heart"></i></div>
+                    <h3>Memory Wall</h3>
+                    <p>Dinding kenangan kelas</p>
+                    <a href="memory-wall.html" class="feature-link">Lihat Kenangan →</a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="650">
+                    <div class="feature-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <h3>Auto Backup</h3>
+                    <p>Data otomatis ke cloud</p>
+                    <a href="admin.html" class="feature-link">Pengaturan →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANNOUNCEMENT -->
+    <section class="announcement-section">
+        <div class="container">
+            <div class="announcement-card" data-aos="zoom-in">
+                <i class="fas fa-bullhorn"></i>
+                <h3>Pengumuman Terbaru</h3>
+                <p id="latestAnnouncement">Selamat datang di website resmi kelas 10 DKV 3 SMK Negeri 1 Cluwak!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo-icon">🎨</div>
+                        <h3>10 DKV 3</h3>
+                    </div>
+                    <p>Website resmi kelas 10 DKV 3 - SMK Negeri 1 Cluwak</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Menu Utama</h4>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="anggota.html">Anggota</a></li>
+                        <li><a href="album.html">Album</a></li>
+                        <li><a href="jadwal.html">Jadwal</a></li>
+                        <li><a href="chat.html">Chat</a></li>
+                        <li><a href="forum.html">Forum</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Fitur Lain</h4>
+                    <ul>
+                        <li><a href="chatbot.html">AI Chatbot</a></li>
+                        <li><a href="saran-box.html">Saran Box</a></li>
+                        <li><a href="music-player.html">Music Player</a></li>
+                        <li><a href="qr-code.html">QR Code</a></li>
+                        <li><a href="dictionary.html">Kamus DKV</a></li>
+                        <li><a href="memory-wall.html">Memory Wall</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontak</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> dkv3@smkn1cluwak.sch.id</li>
+                        <li><i class="fas fa-phone"></i> +62 812-3456-7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> SMK Negeri 1 Cluwak, Pati, Jawa Tengah</li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Kelas 10 DKV 3 - SMK Negeri 1 Cluwak | Designed with Glassmorphism ✨</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/storage.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        function updateStats() {
+            if (typeof storage !== 'undefined') {
+                const members = storage.getMembers();
+                const photos = storage.getPhotos();
+                document.getElementById('totalMembers').textContent = members.length;
+                document.getElementById('totalPhotos').textContent = photos.length;
+                
+                const maleCount = members.filter(m => m.gender === 'Laki-laki').length;
+                const femaleCount = members.filter(m => m.gender === 'Perempuan').length;
+                const ctx = document.getElementById('genderChart')?.getContext('2d');
+                
+                if (ctx && typeof Chart !== 'undefined') {
+                    if (window.genderChart) {
+                        window.genderChart.data.datasets[0].data = [maleCount, femaleCount];
+                        window.genderChart.update();
+                    } else {
+                        window.genderChart = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: ['Laki-laki', 'Perempuan'],
+                                datasets: [{ data: [maleCount, femaleCount], backgroundColor: ['#4f46e5', '#ec489a'] }]
+                            },
+                            options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+                        });
+                    }
+                }
+            }
+        }
+        
+        function loadAnnouncement() {
+            if (typeof storage !== 'undefined') {
+                const settings = storage.getSettings();
+                const el = document.getElementById('latestAnnouncement');
+                if (el && settings.announcement) el.textContent = settings.announcement;
+            }
+        }
+        
+        updateStats();
+        loadAnnouncement();
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true, offset: 100 });
+    </script>
+</body>
+</html>

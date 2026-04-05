@@ -1,0 +1,17 @@
+# ============================================
+# ROBOTS.TXT - Untuk SEO Google
+# Website kelas 10 DKV 3
+# ============================================
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://dkv3.sch.id/sitemap.xml
+
+# Disallow admin pages (jangan diindex Google)
+Disallow: /admin.html
+Disallow: /login.html
+Disallow: /js/
+Disallow: /css/
+Disallow: /*.json$

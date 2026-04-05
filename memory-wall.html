@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Wall | 10 DKV 3</title>
+    <meta name="description" content="Dinding kenangan kelas 10 DKV 3 - Simpan momen berharga bersama">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">🎨</div>
+                <div class="logo-text">10 <span>DKV 3</span></div>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="anggota.html">Anggota</a></li>
+                <li><a href="album.html">Album</a></li>
+                <li><a href="jadwal.html">Jadwal</a></li>
+                <li><a href="chat.html">Chat</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="chatbot.html">AI Bot</a></li>
+                <li><a href="saran-box.html">Saran Box</a></li>
+                <li><a href="music-player.html">Music</a></li>
+                <li><a href="qr-code.html">QR Code</a></li>
+                <li><a href="dictionary.html">Kamus</a></li>
+                <li><a href="memory-wall.html">Memory Wall</a></li>
+                <li><a href="login.html">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header" style="background: linear-gradient(135deg, #4f46e5, #6366f1); padding: 100px 0 40px; text-align: center; color: white;">
+        <div class="container">
+            <h1><i class="fas fa-heart"></i> Memory Wall</h1>
+            <p>Dinding kenangan kelas 10 DKV 3 - Simpan momen berharga</p>
+        </div>
+    </section>
+
+    <div class="memory-wall-container">
+        <div class="memory-form">
+            <h3><i class="fas fa-plus-circle"></i> Tambah Kenangan</h3>
+            <div class="form-group">
+                <input type="text" id="memoryTitle" placeholder="Judul kenangan" style="width:100%; padding:12px; border:1px solid #e2e8f0; border-radius:12px; margin-bottom:10px;">
+            </div>
+            <div class="form-group">
+                <textarea id="memoryMessage" rows="3" placeholder="Ceritakan kenanganmu..." style="width:100%; padding:12px; border:1px solid #e2e8f0; border-radius:12px; margin-bottom:10px;"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="text" id="memoryAuthor" placeholder="Namamu" style="width:100%; padding:12px; border:1px solid #e2e8f0; border-radius:12px; margin-bottom:10px;">
+            </div>
+            <div class="form-group">
+                <input type="file" id="memoryImage" accept="image/*" style="margin-bottom:10px;">
+                <div id="imagePreview"></div>
+            </div>
+            <button id="addMemoryBtn" class="btn-primary" style="padding:12px 24px; border:none; border-radius:12px; cursor:pointer;">Tambah Kenangan</button>
+        </div>
+
+        <div id="memoryGrid" class="memory-grid"></div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo-icon">🎨</div>
+                        <h3>10 DKV 3</h3>
+                    </div>
+                    <p>Website resmi kelas 10 DKV 3</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Menu</h4>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="anggota.html">Anggota</a></li>
+                        <li><a href="album.html">Album</a></li>
+                        <li><a href="dictionary.html">Kamus DKV</a></li>
+                        <li><a href="memory-wall.html">Memory Wall</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontak</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> dkv3@sekolah.sch.id</li>
+                        <li><i class="fas fa-phone"></i> +62 812-3456-7890</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Ikuti Kami</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Kelas 10 DKV 3 - SMK Negeri 1 Jakarta</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/memory-wall.js"></script>
+</body>
+</html>
