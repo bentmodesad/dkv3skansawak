@@ -1,0 +1,165 @@
+/* ============================================
+   FONT MANAGEMENT - 10 DKV 3
+   ============================================ */
+
+/* ========== POPPINS FONT ========== */
+@font-face {
+    font-family: 'Poppins';
+    src: url('poppins/Poppins-Regular.woff2') format('woff2'),
+         url('poppins/Poppins-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('poppins/Poppins-Medium.woff2') format('woff2'),
+         url('poppins/Poppins-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('poppins/Poppins-SemiBold.woff2') format('woff2'),
+         url('poppins/Poppins-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('poppins/Poppins-Bold.woff2') format('woff2'),
+         url('poppins/Poppins-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ========== INTER FONT ========== */
+@font-face {
+    font-family: 'Inter';
+    src: url('inter/Inter-Regular.woff2') format('woff2'),
+         url('inter/Inter-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('inter/Inter-Medium.woff2') format('woff2'),
+         url('inter/Inter-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('inter/Inter-SemiBold.woff2') format('woff2'),
+         url('inter/Inter-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('inter/Inter-Bold.woff2') format('woff2'),
+         url('inter/Inter-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ========== MONTSERRAT FONT ========== */
+@font-face {
+    font-family: 'Montserrat';
+    src: url('montserrat/Montserrat-Regular.woff2') format('woff2'),
+         url('montserrat/Montserrat-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('montserrat/Montserrat-Medium.woff2') format('woff2'),
+         url('montserrat/Montserrat-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('montserrat/Montserrat-SemiBold.woff2') format('woff2'),
+         url('montserrat/Montserrat-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('montserrat/Montserrat-Bold.woff2') format('woff2'),
+         url('montserrat/Montserrat-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ========== FONT VARIABLES ========== */
+:root {
+    --font-primary: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-heading: 'Poppins', 'Montserrat', var(--font-primary);
+    --font-body: 'Inter', var(--font-primary);
+    --font-code: 'Courier New', monospace;
+}
+
+/* ========== DEFAULT STYLES ========== */
+body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+code, pre, .code {
+    font-family: var(--font-code);
+}
+
+/* ========== UTILITY CLASSES ========== */
+.font-poppins { font-family: 'Poppins', var(--font-primary); }
+.font-inter { font-family: 'Inter', var(--font-primary); }
+.font-montserrat { font-family: 'Montserrat', var(--font-primary); }
+
+.font-light { font-weight: 300; }
+.font-regular { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+/* ========== FONT SIZES ========== */
+.text-xs { font-size: 0.75rem; }
+.text-sm { font-size: 0.875rem; }
+.text-base { font-size: 1rem; }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+.text-2xl { font-size: 1.5rem; }
+.text-3xl { font-size: 1.875rem; }
+.text-4xl { font-size: 2.25rem; }
+.text-5xl { font-size: 3rem; }

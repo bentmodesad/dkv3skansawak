@@ -1,0 +1,97 @@
+/* ============================================
+   DARK MODE - 10 DKV 3
+   ============================================ */
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --card-bg: #1e293b;
+    --border: #334155;
+    --navbar-bg: rgba(30, 41, 59, 0.95);
+}
+
+/* Dark Mode Styles */
+[data-theme="dark"] body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .navbar {
+    background: var(--navbar-bg);
+    border-bottom: 1px solid var(--border);
+}
+
+[data-theme="dark"] .navbar a,
+[data-theme="dark"] .logo-text {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .feature-card,
+[data-theme="dark"] .member-card,
+[data-theme="dark"] .album-card,
+[data-theme="dark"] .chat-container,
+[data-theme="dark"] .forum-card,
+[data-theme="dark"] .qr-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .search-box {
+    background: var(--bg-secondary);
+    border-color: var(--border);
+}
+
+[data-theme="dark"] .search-box input {
+    background: transparent;
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .filter-btn {
+    background: var(--bg-secondary);
+    border-color: var(--border);
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .filter-btn.active {
+    background: #4f46e5;
+    color: white;
+}
+
+[data-theme="dark"] .chat-messages {
+    background: var(--bg-primary);
+}
+
+[data-theme="dark"] .chat-bubble {
+    background: var(--card-bg);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .footer {
+    background: #020617;
+}
+
+/* Dark Mode Toggle Button */
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s;
+    color: #1e293b;
+}
+
+[data-theme="dark"] .dark-mode-toggle {
+    color: #fbbf24;
+}
+
+.dark-mode-toggle:hover {
+    background: rgba(0,0,0,0.1);
+    transform: rotate(15deg);
+}
