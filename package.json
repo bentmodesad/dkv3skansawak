@@ -24,5 +24,3 @@
   "references": [{ "path": "./tsconfig.node.json" }]
 }
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
-}
